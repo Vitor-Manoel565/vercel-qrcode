@@ -14,7 +14,7 @@ export const useUserData = () => {
   const getUserById = async (id: string): Promise<User> => {
     console.log("🚀 ~ file: useUserData.ts ~ line 91 ~ getUserById ~ id", id);
 
-    const response = await axios.get(`http://192.168.10.214:8080/users`, {
+    const response = await axios.get(`https://f0f4-187-51-208-238.ngrok-free.app/users`, {
       headers: {
         id,
       },
