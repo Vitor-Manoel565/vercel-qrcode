@@ -1,7 +1,7 @@
 import { useUserData } from "../../hooks/useUser";
 import { User } from "../../utils/interfaces";
 import * as S from "./styles";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { IoWarningOutline } from "react-icons/io5";
 import { ContainerUserData } from "../../components/modalUserData";
@@ -9,10 +9,10 @@ function Home() {
   const [id, setId] = useState("");
   const { getUserById } = useUserData();
   const [user, setUser] = useState<User | null>();
-  const handleUser = async (id: string) => {
-    const user = await getUserById(id);
-    setUser(user);
-  };
+  // const handleUser = async (id: string) => {
+  //   const user = await getUserById(id);
+  //   setUser(user);
+  // };
 
   const formsData = [
     {

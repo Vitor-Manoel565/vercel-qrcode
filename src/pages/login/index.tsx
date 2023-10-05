@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "../../theme/layout";
 import { COLORS } from "../../theme/colors";
 import { Input } from "../../components/Input";
