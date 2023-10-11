@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import { Container, LogoUVP } from "./theme/layout";
 import { COLORS } from "./theme/colors";
 import logo from "../src/assets/LogoAUVP.svg";
+import { useEffect } from "react";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(() => {
+    const _token = localStorage.getItem("auvp@qrcodeapp");
+    if (_token) {
+      router.navigate("/home");
+    } else {
+      router.navigate("/login");
+    }
+  }, []);
+
   return (
     <Container
       display="flex"
@@ -34,9 +44,9 @@ function App() {
       height="100vh"
       flexDirection="column"
       justifyContent="flex-start"
+      alignItems="center"
       backgroundColor={COLORS.dark}
       padding="2rem 0 0 0"
-      gap="4rem"
     >
       <LogoUVP src={logo} />
       <RouterProvider router={router} />;

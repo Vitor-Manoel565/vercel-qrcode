@@ -3,10 +3,14 @@ import { COLORS } from "../../theme/colors";
 import { Input } from "../../components/Input";
 import { useState } from "react";
 import { Button } from "../../components/Button";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
-  const [user, setUser] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [userLogin, setUserLogin] = useState({
+    user: "",
+    password: "",
+  });
+  const { getAdminToken } = useAuth();
   return (
     <Container
       position="relative"
@@ -18,18 +22,21 @@ export default function Login() {
       alignItems="center"
       borderRadius="16px"
       minHeight="450px"
+      minWidth="300px"
       backgroundColor={COLORS.light}
     >
       <Input
-        value={user}
-        onChange={(e) => setUser(e.target.value)}
+        value={userLogin.user}
+        onChange={(e) => setUserLogin({ ...userLogin, user: e.target.value })}
         placeholder="Usuário:"
         type="text"
         width="80%"
       />
       <Input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={userLogin.password}
+        onChange={(e) =>
+          setUserLogin({ ...userLogin, password: e.target.value })
+        }
         placeholder="Senha:"
         type="password"
         width="80%"
@@ -42,15 +49,13 @@ export default function Login() {
         height="auto"
         width="100%"
         top="95%"
-        onClick={() => {
-          console.log("click");
-        }}
+        border="1px solid red"
       >
         <Button
           width="60%"
           minWidth="0"
-          onClick={() => {
-            console.log(user, password);
+          onClick={async () => {
+            await getAdminToken(userLogin.user, userLogin.password);
           }}
           text="Entrar"
         />

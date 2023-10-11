@@ -1,78 +1,151 @@
 import { useUserData } from "../../hooks/useUser";
 import { User } from "../../utils/interfaces";
 import * as S from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QrReader } from "react-qr-reader";
-import { IoWarningOutline } from "react-icons/io5";
+import { Result } from "@zxing/library";
 import { ContainerUserData } from "../../components/modalUserData";
+import {
+  Container,
+  IconFail,
+  IconSuccess,
+  IconWarning,
+} from "../../theme/layout";
+import { Button } from "../../components/Button";
+import { COLORS } from "../../theme/colors";
 function Home() {
-  const [id, setId] = useState("");
-  const { getUserById } = useUserData();
-  const [user, setUser] = useState<User | null>();
-  // const handleUser = async (id: string) => {
-  //   const user = await getUserById(id);
-  //   setUser(user);
-  // };
+  const { getUserById, updateUser } = useUserData();
+  const [user, setUser] = useState<User | null>(null);
+  const [qrCodeResult, setQrCodeResult] = useState<string | null>(null);
+  const [id, setId] = useState<string>("");
 
   const formsData = [
     {
-      text: "IGRESSO VALIDADO COM SUCESSO",
-      icon: <IoWarningOutline />,
+      text: user
+        ? !user.validated
+          ? "INGRESSO VÁLIDO"
+          : "INGRESSO JÁ FOI VALIDADO"
+        : "ERRO AO VALIDAR INGRESSO",
+      icon: user ? (
+        !user.validated ? (
+          <IconSuccess />
+        ) : (
+          <IconWarning />
+        )
+      ) : (
+        <IconFail />
+      ),
       user,
     },
   ];
 
-  // useEffect(() => {
-  //   // const paramsId = new URLSearchParams(window.location.search).get("id");
-  //   setId(id);
-  //   const user = getUserById(id);
-  //   if (!user) return console.log("user not found");
-  //   setUser(user);
-  // }, [id]);
+  const handleResult = async (result: Result | null | undefined) => {
+    if (!result) return;
 
-  // dataUser: {
-  //   name: string;
-  //   email: string;
-  //   cpf: string;
-  //   phone: string;
-  //   price: number;
-  //   city: string;
-  // }
-  // [];
+    setQrCodeResult(result.getText());
+  };
+
+  useEffect(() => {
+    if (!qrCodeResult) return;
+    setId(qrCodeResult);
+
+    const fetchUser = async () => {
+      try {
+        const user = await getUserById(qrCodeResult);
+
+        if (!user) return;
+        setUser(user);
+
+        return;
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    };
+
+    fetchUser();
+  }, [qrCodeResult]);
+
+  console.log("user: ", user);
 
   return (
     <S.Container>
-      <h3 style={{ color: "white" }}>{id}</h3>
-      <h3 style={{ color: "white" }}>{user?.name}</h3>
+      {!qrCodeResult && (
+        <QrReader
+          key={qrCodeResult || "default"}
+          constraints={{ facingMode: "environment" }}
+          className="qr-reader"
+          containerStyle={{
+            width: "80%",
+            height: "40%",
+            borderRadius: "10px",
+            minWidth: "300px",
+            maxWidth: "500px",
+            minHeight: "300px",
+            maxHeight: "40%",
+          }}
+          onResult={handleResult}
+          scanDelay={300}
+          videoContainerStyle={{ width: "100%", height: "100%" }}
+          videoId="video"
+          videoStyle={{ width: "100%" }}
+        />
+      )}
 
-      <QrReader
-        constraints={{ facingMode: "environment" }}
-        className="qr-reader"
-        containerStyle={{
-          width: "80%",
-          height: "40%",
-          borderRadius: "10px",
-          minWidth: "300px",
-          maxWidth: "500px",
-          minHeight: "300px",
-          maxHeight: "40%",
-        }}
-        onResult={async (result) => {
-          if (!result) return;
-          const _id = result.getText();
-          setId(_id);
-          const user = await getUserById(_id);
-          if (!user) return console.log("user not found");
-          setUser(user);
-        }}
-        scanDelay={300}
-        videoContainerStyle={{ width: "100%", height: "100%" }}
-        videoId="video"
-        videoStyle={{ width: "100%" }}
-      />
       {user &&
         formsData.map((form) => {
-          return <ContainerUserData dataUser={user} icon={form.icon} />;
+          return (
+            <ContainerUserData
+              dataUser={user}
+              icon={form.icon}
+              text={form.text}
+            >
+              <Container
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                position="absolute"
+                height="fit-content"
+                width="100%"
+                bottom="-71px"
+                left="0"
+                gap="0.5rem"
+              >
+                {user && (
+                  <>
+                    <Button
+                      width="60%"
+                      minWidth="40px"
+                      onClick={async () => {
+                        try {
+                          await updateUser(id, true);
+                          setUser(null);
+                          setQrCodeResult(null);
+                          window.location.reload();
+                        } catch (err) {
+                          console.log(err);
+                        }
+                      }}
+                      text="CONFIRMAR ENTADA"
+                    />
+                    <Button
+                      width="60%"
+                      minWidth="0"
+                      onClick={() => {
+                        setUser(null);
+                        setQrCodeResult(null);
+                        window.location.reload();
+                      }}
+                      backgroundColor={COLORS.dark}
+                      border={`1px solid ${COLORS.light}`}
+                      text="VALIDAR NOVO INGRESSO"
+                    />
+                  </>
+                )}
+              </Container>
+            </ContainerUserData>
+          );
         })}
     </S.Container>
   );

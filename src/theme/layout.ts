@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { IoWarningOutline } from "react-icons/io5";
+import { BiCheckCircle } from "react-icons/bi";
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import { COLORS } from "./colors";
 
 export const Container = styled.div<{
   width?: string;
@@ -22,10 +26,11 @@ export const Container = styled.div<{
   gap?: string;
   border?: string;
   borderBottom?: string;
+  margin?: string;
 }>`
   display: ${(props) => props.display || null};
-  flex-direction: ${(props) => props.flexDirection || "row"};
-  justify-content: ${(props) => props.justifyContent || "flex-start"};
+  flex-direction: ${(props) => props.flexDirection || null};
+  justify-content: ${(props) => props.justifyContent || null};
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "100%"};
   background-color: ${(props) => props.backgroundColor || null};
@@ -37,18 +42,19 @@ export const Container = styled.div<{
   max-width: ${(props) => props.maxWidth || null};
   max-height: ${(props) => props.maxHeight || null};
   position: ${(props) => props.position || null};
-  top: ${(props) => props.top || "0"};
-  left: ${(props) => props.left || "0"};
-  right: ${(props) => props.right || "0"};
-  bottom: ${(props) => props.bottom || "0"};
-  gap: ${(props) => props.gap || "0"};
+  top: ${(props) => props.top || "unset"};
+  left: ${(props) => props.left || "unset"};
+  right: ${(props) => props.right || "unset"};
+  bottom: ${(props) => props.bottom || "unset"};
+  gap: ${(props) => props.gap || "unset"};
   border: ${(props) => props.border || "none"};
   border-bottom: ${(props) => props.borderBottom || "none"};
+  margin: ${(props) => props.margin || "0"};
 `;
 
 export const LogoUVP = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   margin-bottom: 20px;
 `;
 
@@ -60,4 +66,22 @@ export const Figcaption = styled.figcaption<{
   color: ${(props) => props.color || "#fff"};
   font-size: ${(props) => props.fontSize || "16px"};
   font-weight: ${(props) => props.fontWeight || "normal"};
+`;
+
+export const IconWarning = styled(IoWarningOutline)`
+  width: 40px;
+  height: 40px;
+  color: ${COLORS.warning};
+`;
+
+export const IconSuccess = styled(BiCheckCircle)`
+  width: 40px;
+  height: 40px;
+  color: ${COLORS.success};
+`;
+
+export const IconFail = styled(IoIosCloseCircleOutline)`
+  width: 40px;
+  height: 40px;
+  color: ${COLORS.alert};
 `;

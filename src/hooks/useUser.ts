@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../utils/interfaces";
+// import { User } from "../utils/interfaces";
 // import { userAtom } from "./states";
 // import { useAtom } from "jotai";
 
@@ -7,26 +7,52 @@ export const useUserData = () => {
   //   const [user, setUser] = useAtom(userAtom);
 
   const getUserData = async () => {
-    const response = await axios.get("http://localhost:8080/users");
+    const response = await axios.get(`${process.env.BACKEND_URL}/users`);
     return response.data;
   };
 
-  const getUserById = async (id: string): Promise<User> => {
-    console.log("🚀 ~ file: useUserData.ts ~ line 91 ~ getUserById ~ id", id);
+  const getUserById = async (id: string) => {
+    try {
+      const response = await axios.get(`${process.env.BACKEND_URL}/users`, {
+        headers: {
+          id,
+        },
+      });
 
-    const response = await axios.get(`https://f989-187-51-208-238.ngrok-free.app//users`, {
-      headers: {
-        id,
-      },
-    });
-    console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log("error", error);
 
-    return response.data;
+      return null;
+    }
+  };
+
+  const updateUser = async (
+    id: string,
+    validated: boolean
+  ): Promise<boolean> => {
+    try {
+      await axios.patch(
+        `${process.env.BACKEND_URL}/users/validated`,
+        {
+          validated,
+        },
+        {
+          headers: {
+            id,
+          },
+        }
+      );
+
+      return true;
+    } catch (error) {
+      return false;
+    }
   };
 
   return {
     getUserData,
     getUserById,
-    // user,
+    updateUser,
   };
 };

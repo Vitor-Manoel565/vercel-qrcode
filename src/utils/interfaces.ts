@@ -4,9 +4,17 @@ export interface User {
   cpf: string;
   phone: string;
   qrcode: string;
-  city: string;
-  date: string;
-  sector: string;
-  password?: string;
+  typeTicket?: string;
   price?: number;
+  city?: string;
+  date?: string;
+  sector?: string;
+  createdAt?: string;
+  validated: boolean;
+}
+
+export interface Error {
+  message: string;
+  error: string;
+  statusCode: number;
 }

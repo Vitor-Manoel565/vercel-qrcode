@@ -1,6 +1,7 @@
-import jotai from "jotai";
+import { atom } from "jotai";
 import { User } from "../utils/interfaces";
 // import { QRcode } from "../utils/interfaces";
 
-export const qrcodeAtom = jotai.atom<string>("");
-export const userAtom = jotai.atom<User | null>(null);
+export const qrcodeAtom = atom<string>("");
+export const userAtom = atom<User | null>(null);
+export const tokenAtom = atom<string | null>(null);

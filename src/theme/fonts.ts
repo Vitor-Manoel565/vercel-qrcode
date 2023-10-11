@@ -7,7 +7,7 @@ interface ISize<T> {
 }
 
 export const FONTSIZE: ISize<string> = {
-  sm: "1rem",
+  sm: "0.7rem",
   md: "1.5rem",
   lg: "2rem",
   xl: "3rem",

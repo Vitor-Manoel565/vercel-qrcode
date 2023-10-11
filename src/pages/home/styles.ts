@@ -8,6 +8,7 @@ export const Container = styled.div`
   background-color: #060606;
   width: 100vw;
   height: 100vh;
+  position: relative;
   h1 {
     margin-bottom: 20px;
     color: ${COLORS.success};
