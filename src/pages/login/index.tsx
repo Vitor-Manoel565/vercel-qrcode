@@ -49,7 +49,6 @@ export default function Login() {
         height="auto"
         width="100%"
         top="95%"
-        border="1px solid red"
       >
         <Button
           width="60%"
