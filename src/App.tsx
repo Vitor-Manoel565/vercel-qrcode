@@ -27,12 +27,15 @@ const router = createBrowserRouter([
   },
 ]);
 
-const publicRouter = [
+const privateRouter = [
   {
     path: "/testecomponents",
   },
   {
     path: "/home",
+  },
+  {
+    path: "/",
   },
 ];
 
@@ -41,7 +44,7 @@ function App() {
     const _token = localStorage.getItem("auvp@qrcodeapp");
     const _path = window.location.pathname;
 
-    if (!_token && !publicRouter.find((item) => item.path === _path)) {
+    if (!_token && privateRouter.find((item) => item.path === _path)) {
       router.navigate("/login");
     }
   }, []);
