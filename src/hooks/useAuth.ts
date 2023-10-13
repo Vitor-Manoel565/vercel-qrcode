@@ -7,7 +7,7 @@ export const useAuth = () => {
   const getAdminToken = async (name: string, password: string) => {
     try {
       const userToken = await axios.post(
-        `${process.env.BACKEND_URL}auth/signin`,
+        `${process.env.BACKEND_URL}/auth/signin`,
         {
           name,
           password,
