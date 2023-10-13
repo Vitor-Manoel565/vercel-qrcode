@@ -29,15 +29,15 @@ function Home() {
   const formsData = [
     {
       text:
-        user && user.validated === false
+        user && !user.validated
           ? "INGRESSO VÁLIDO"
-          : user && user.validated === true
-          ? "INGRESSO JÁ VÁLIDADO"
-          : (error.error && `${error.message}`) || "INGRESSO NÃO ENCONTRADO",
+          : user && user.validated
+          ? "ENTRADA JÁ VALIDADA"
+          : "INGRESSO INVÁLIDO",
       icon:
-        user && user.validated === false ? (
+        user && !user.validated ? (
           <IconSuccess />
-        ) : user && user.validated === true ? (
+        ) : user && user.validated ? (
           <IconWarning />
         ) : (
           <IconFail />
@@ -104,6 +104,7 @@ function Home() {
       )}
 
       {qrCodeResult &&
+        user &&
         formsData.map((form) => {
           return (
             <ContainerUserData
@@ -119,12 +120,12 @@ function Home() {
                 position="absolute"
                 height="fit-content"
                 width="100%"
-                bottom={user ? "-71px" : "-30px"}
+                bottom={user && !user.validated ? "-71px" : "-30px"}
                 left="0"
                 gap="0.5rem"
               >
                 <>
-                  {user && (
+                  {user && !user.validated && (
                     <Button
                       width="60%"
                       minWidth="40px"
