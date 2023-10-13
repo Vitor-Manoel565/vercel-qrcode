@@ -22,9 +22,7 @@ function Home() {
   const formsData = [
     {
       text:
-        (user && "INGRESSO VÁLIDO") ||
-        (user?.validated && "INGRESSO JÁ VALIDADO") ||
-        (user && !user?.validated === false ? "ENTRADA JÁ VÁLIDADA" : "INGRESSO INVÁLIDO"),
+        user && user.validated === false ? "INGRESSO VÁLIDO" : user && user.validated === true ? "INGRESSO JÁ VÁLIDADO" : "INGRESSO NÃO ENCONTRADO", 
       icon: user ? (
         !user.validated ? (
           <IconSuccess />
