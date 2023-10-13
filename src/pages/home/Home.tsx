@@ -18,13 +18,6 @@ function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [qrCodeResult, setQrCodeResult] = useState<string | null>(null);
   const [id, setId] = useState<string>("");
-  const [error, setError] = useState<{
-    error: boolean;
-    message: string;
-  }>({
-    error: false,
-    message: "",
-  });
 
   const formsData = [
     {
@@ -65,11 +58,6 @@ function Home() {
 
         return;
       } catch (error) {
-        console.log(error);
-        setError({
-          error: true,
-          message: error.response.data || "Erro ao buscar usuário",
-        });
         return;
       }
     };
@@ -136,10 +124,7 @@ function Home() {
                           setQrCodeResult(null);
                           window.location.reload();
                         } catch (err) {
-                          setError({
-                            error: true,
-                            message: err.response.data || "Erro ao validar",
-                          });
+                          return;
                         }
                       }}
                       text="CONFIRMAR ENTADA"
