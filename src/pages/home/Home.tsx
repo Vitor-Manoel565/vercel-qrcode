@@ -26,7 +26,7 @@ function Home() {
           ? "INGRESSO VÁLIDO"
           : user && user.validated === true
           ? "INGRESSO JÁ VÁLIDADO"
-          : "INGRESSO NÃO ENCONTRADO",
+          : user === undefined && "INGRESSO NÃO ENCONTRADO" || "INGRESSO NÃO ENCONTRADO",
       icon:
         user && user.validated === false ? (
           <IconSuccess />
