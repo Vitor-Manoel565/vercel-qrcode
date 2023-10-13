@@ -66,7 +66,6 @@ function Home() {
     fetchUser();
   }, [qrCodeResult]);
 
-  console.log("user: ", user);
 
   return (
     <S.Container>

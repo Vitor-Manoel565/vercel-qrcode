@@ -27,12 +27,21 @@ const router = createBrowserRouter([
   },
 ]);
 
+const publicRouter = [
+  {
+    path: "/testecomponents",
+  },
+  {
+    path: "/home",
+  },
+];
+
 function App() {
   useEffect(() => {
     const _token = localStorage.getItem("auvp@qrcodeapp");
-    if (_token) {
-      router.navigate("/home");
-    } else {
+    const _path = window.location.pathname;
+
+    if (!_token && !publicRouter.find((item) => item.path === _path)) {
       router.navigate("/login");
     }
   }, []);

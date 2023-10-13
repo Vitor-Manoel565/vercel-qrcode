@@ -6,9 +6,6 @@ export const useAuth = () => {
   const [token, setToken] = useAtom(tokenAtom);
   const getAdminToken = async (name: string, password: string) => {
     try {
-      console.log("name", name);
-      console.log("requisição", `${process.env.BACKEND_URL}/auth/signin`);
-
       const userToken = await axios.post(
         `${process.env.BACKEND_URL}/auth/signin`,
         {
@@ -26,6 +23,7 @@ export const useAuth = () => {
       return;
     } catch (error) {
       console.log("error", error);
+      return null;
     }
   };
 
