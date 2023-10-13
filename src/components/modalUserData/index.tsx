@@ -3,7 +3,7 @@ import { Container, Figcaption } from "../../theme/layout";
 import { User } from "../../utils/interfaces";
 
 interface IContainerUserDataProps {
-  dataUser: User;
+  dataUser: User | null;
   icon: React.ReactNode;
   text: string;
   children: React.ReactNode;
@@ -18,41 +18,47 @@ export const ContainerUserData: React.FC<IContainerUserDataProps> = ({
   const labelsForms = [
     {
       label: "Nome",
-      value: dataUser.name || "Não informado",
+      value: dataUser?.name || "Não informado",
     },
     {
       label: "Email",
-      value: dataUser.email || "Não informado",
+      value: dataUser?.email || "Não informado",
     },
     {
       label: "CPF",
-      value: dataUser.cpf || "Não informado",
+      value: dataUser?.cpf || "Não informado",
     },
     {
       label: "Telefone",
-      value: dataUser.phone || "Não informado",
+      value: dataUser?.phone || "Não informado",
     },
     {
       label: "Preço",
-      value: dataUser.price || "Não informado",
+      value: dataUser?.price || "Não informado",
     },
     {
       label: "Cidade",
-      value: dataUser.city || "Não informado",
+      value: dataUser?.city || "Não informado",
     },
     {
       label: "Data do evento",
-      value: dataUser.date || "Não informado",
+      value: dataUser?.date || "Não informado",
     },
     {
       label: "Tipo do ingresso",
-      value: dataUser.typeTicket || "Não informado",
+      value: dataUser?.typeTicket || "Não informado",
     },
     {
       label: "Data da compra",
-      value: dataUser.createdAt || "Não informado",
+      value: dataUser?.createdAt || "Não informado",
     },
   ];
+
+  console.log(
+    "🚀 ~ file: index.tsx ~ line 96 ~ ContainerUserData ~ labelsForms",
+    labelsForms
+  );
+
   return (
     <Container
       position="relative"

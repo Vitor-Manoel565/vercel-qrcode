@@ -33,8 +33,7 @@ function Home() {
           ? "INGRESSO VÁLIDO"
           : user && user.validated === true
           ? "INGRESSO JÁ VÁLIDADO"
-          : (error.error && `${error.message}`) ||
-            "INGRESSO NÃO ENCONTRADO",
+          : (error.error && `${error.message}`) || "INGRESSO NÃO ENCONTRADO",
       icon:
         user && user.validated === false ? (
           <IconSuccess />
@@ -67,12 +66,18 @@ function Home() {
         return;
       } catch (error) {
         console.log(error);
+        setError({
+          error: true,
+          message: error.response.data || "Erro ao buscar usuário",
+        });
         return;
       }
     };
 
     fetchUser();
   }, [qrCodeResult]);
+
+  console.log(formsData);
 
   return (
     <S.Container>
@@ -98,11 +103,11 @@ function Home() {
         />
       )}
 
-      {user &&
+      {qrCodeResult &&
         formsData.map((form) => {
           return (
             <ContainerUserData
-              dataUser={user}
+              dataUser={user || null}
               icon={form.icon}
               text={form.text}
             >
@@ -114,12 +119,12 @@ function Home() {
                 position="absolute"
                 height="fit-content"
                 width="100%"
-                bottom="-71px"
+                bottom={user ? "-71px" : "-30px"}
                 left="0"
                 gap="0.5rem"
               >
-                {user && (
-                  <>
+                <>
+                  {user && (
                     <Button
                       width="60%"
                       minWidth="40px"
@@ -138,20 +143,20 @@ function Home() {
                       }}
                       text="CONFIRMAR ENTADA"
                     />
-                    <Button
-                      width="60%"
-                      minWidth="0"
-                      onClick={() => {
-                        setUser(null);
-                        setQrCodeResult(null);
-                        window.location.reload();
-                      }}
-                      backgroundColor={COLORS.dark}
-                      border={`1px solid ${COLORS.light}`}
-                      text="VALIDAR NOVO INGRESSO"
-                    />
-                  </>
-                )}
+                  )}
+                  <Button
+                    width="60%"
+                    minWidth="0"
+                    onClick={() => {
+                      setUser(null);
+                      setQrCodeResult(null);
+                      window.location.reload();
+                    }}
+                    backgroundColor={COLORS.dark}
+                    border={`1px solid ${COLORS.light}`}
+                    text="VALIDAR NOVO INGRESSO"
+                  />
+                </>
               </Container>
             </ContainerUserData>
           );

@@ -12,7 +12,7 @@ interface IColors<T> {
 export const COLORS: IColors<string> = {
   light: "#fff",
   dark: "#000",
-  alert: "",
+  alert: "#FF0F0F",
   success: "#00BF7A",
   primary: "#DAA95A",
   gray: "#F5F5F5",
