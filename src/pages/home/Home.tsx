@@ -22,16 +22,19 @@ function Home() {
   const formsData = [
     {
       text:
-        user && user.validated === false ? "INGRESSO VÁLIDO" : user && user.validated === true ? "INGRESSO JÁ VÁLIDADO" : "INGRESSO NÃO ENCONTRADO", 
-      icon: user ? (
-        !user.validated ? (
+        user && user.validated === false
+          ? "INGRESSO VÁLIDO"
+          : user && user.validated === true
+          ? "INGRESSO JÁ VÁLIDADO"
+          : "INGRESSO NÃO ENCONTRADO",
+      icon:
+        user && user.validated === false ? (
           <IconSuccess />
-        ) : (
+        ) : user && user.validated === true ? (
           <IconWarning />
-        )
-      ) : (
-        <IconFail />
-      ),
+        ) : (
+          <IconFail />
+        ),
       user,
     },
   ];
