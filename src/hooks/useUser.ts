@@ -50,9 +50,33 @@ export const useUserData = () => {
     }
   };
 
+  const updateUserEntry = async (
+    id: string,
+    validatedEntry: boolean
+  ): Promise<boolean> => {
+    try {
+      await axios.patch(
+        `${process.env.BACKEND_URL}/users/validated/entry`,
+        {
+          validatedEntry,
+        },
+        {
+          headers: {
+            id,
+          },
+        }
+      );
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   return {
     getUserData,
     getUserById,
     updateUser,
+    updateUserEntry,
   };
 };

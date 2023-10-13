@@ -21,11 +21,10 @@ function Home() {
 
   const formsData = [
     {
-      text: user
-        ? !user.validated
-          ? "INGRESSO VÁLIDO"
-          : "INGRESSO JÁ FOI VALIDADO"
-        : "ERRO AO VALIDAR INGRESSO",
+      text:
+        (user && "INGRESSO VÁLIDO") ||
+        (user?.validated && "INGRESSO JÁ VALIDADO") ||
+        (user && !user?.validated === false ? "ENTRADA JÁ VÁLIDADA" : "INGRESSO INVÁLIDO"),
       icon: user ? (
         !user.validated ? (
           <IconSuccess />
@@ -65,7 +64,6 @@ function Home() {
 
     fetchUser();
   }, [qrCodeResult]);
-
 
   return (
     <S.Container>

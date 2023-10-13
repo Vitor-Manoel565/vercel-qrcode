@@ -11,6 +11,7 @@ export interface User {
   sector?: string;
   createdAt?: string;
   validated: boolean;
+  validatedEntry?: boolean;
 }
 
 export interface Error {
