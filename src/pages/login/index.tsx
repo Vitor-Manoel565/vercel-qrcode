@@ -4,6 +4,7 @@ import { Input } from "../../components/Input";
 import { useState } from "react";
 import { Button } from "../../components/Button";
 import { useAuth } from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [userLogin, setUserLogin] = useState({
@@ -54,7 +55,12 @@ export default function Login() {
           width="60%"
           minWidth="0"
           onClick={async () => {
-            await getAdminToken(userLogin.user, userLogin.password);
+            try {
+              await getAdminToken(userLogin.user, userLogin.password);
+              toast.success("Login realizado com sucesso!");
+            } catch (error) {
+              toast.error("Erro ao realizar login!");
+            }
           }}
           text="Entrar"
         />

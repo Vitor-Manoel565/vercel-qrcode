@@ -7,6 +7,8 @@ import { Container, LogoUVP } from "./theme/layout";
 import { COLORS } from "./theme/colors";
 import logo from "../src/assets/LogoAUVP.svg";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,7 @@ function App() {
       backgroundColor={COLORS.dark}
       padding="2rem 0 0 0"
     >
+      <ToastContainer />
       <LogoUVP src={logo} />
       <RouterProvider router={router} />;
     </Container>

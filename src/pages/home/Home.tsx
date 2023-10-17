@@ -13,6 +13,7 @@ import {
 } from "../../theme/layout";
 import { Button } from "../../components/Button";
 import { COLORS } from "../../theme/colors";
+import { toast } from "react-toastify";
 function Home() {
   const { getUserById, updateUser } = useUserData();
   const [user, setUser] = useState<User | null>(null);
@@ -55,9 +56,10 @@ function Home() {
 
         if (!user) return;
         setUser(user);
-
+        toast.success("Ingresso encontrado!");
         return;
       } catch (error) {
+        toast.error("Ingresso não encontrado!");
         return;
       }
     };
@@ -122,8 +124,10 @@ function Home() {
                           await updateUser(id, true);
                           setUser(null);
                           setQrCodeResult(null);
+                          toast.success("Entrada confirmada com sucesso!");
                           window.location.reload();
                         } catch (err) {
+                          toast.error("Erro ao confirmar entrada!");
                           return;
                         }
                       }}
