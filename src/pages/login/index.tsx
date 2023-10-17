@@ -11,6 +11,7 @@ export default function Login() {
     user: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const { getAdminToken } = useAuth();
   return (
     <Container
@@ -56,12 +57,14 @@ export default function Login() {
           minWidth="0"
           onClick={async () => {
             try {
+              setLoading(true);
               await getAdminToken(userLogin.user, userLogin.password);
               toast.success("Login realizado com sucesso!");
             } catch (error) {
               toast.error("Erro ao realizar login!");
             }
           }}
+          disabled={loading}
           text="Entrar"
         />
       </Container>

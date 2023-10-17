@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: <div>Hello world!</div>,
   },
   {
@@ -38,6 +38,9 @@ const privateRouter = [
   },
   {
     path: "/",
+  },
+  {
+    path: "",
   },
 ];
 
