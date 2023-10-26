@@ -21,9 +21,7 @@ export const useUserData = () => {
 
       return response.data;
     } catch (error) {
-      console.log("error", error);
-
-      return undefined;
+      return null;
     }
   };
 

@@ -23,15 +23,15 @@ function Home() {
   const formsData = [
     {
       text:
-        user && !user.validated
+        user && !user.product?.validated
           ? "INGRESSO VÁLIDO"
-          : user && user.validated
+          : user && user.product?.validated
           ? "ENTRADA JÁ VALIDADA"
           : "INGRESSO INVÁLIDO",
       icon:
-        user && !user.validated ? (
+        user && !user.product?.validated ? (
           <IconSuccess />
-        ) : user && user.validated ? (
+        ) : user && user.product?.validated ? (
           <IconWarning />
         ) : (
           <IconFail />
@@ -53,7 +53,6 @@ function Home() {
     const fetchUser = async () => {
       try {
         const user = await getUserById(qrCodeResult);
-
         if (!user) return;
         setUser(user);
         toast.success("Ingresso encontrado!");
@@ -110,22 +109,24 @@ function Home() {
                 position="absolute"
                 height="fit-content"
                 width="100%"
-                bottom={user && !user.validated ? "-71px" : "-30px"}
+                bottom={user && !user.product?.validated ? "-71px" : "-30px"}
                 left="0"
                 gap="0.5rem"
               >
                 <>
-                  {user && !user.validated && (
+                  {user && !user.product?.validated && (
                     <Button
                       width="60%"
                       minWidth="40px"
                       onClick={async () => {
                         try {
                           await updateUser(id, true);
-                          setUser(null);
-                          setQrCodeResult(null);
                           toast.success("Entrada confirmada com sucesso!");
-                          window.location.reload();
+                          setTimeout(() => {
+                            setUser(null);
+                            setQrCodeResult(null);
+                            window.location.reload();
+                          }, 2000);
                         } catch (err) {
                           toast.error("Erro ao confirmar entrada!");
                           return;

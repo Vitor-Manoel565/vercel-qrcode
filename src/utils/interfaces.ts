@@ -3,15 +3,17 @@ export interface User {
   name: string;
   cpf: string;
   phone: string;
-  qrcode: string;
-  typeTicket?: string;
-  price?: number;
-  city?: string;
-  date?: string;
-  sector?: string;
-  createdAt?: string;
-  validated: boolean;
-  validatedEntry?: boolean;
+  product?: {
+    offerId: string;
+    eventName: string;
+    price: number;
+    address: string;
+    offerName: string;
+    createdAt: string;
+    statusPayment: string;
+    validated: boolean;
+  };
+  validatedAt?: string;
 }
 
 export interface Error {

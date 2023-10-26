@@ -17,6 +17,10 @@ export const ContainerUserData: React.FC<IContainerUserDataProps> = ({
 }) => {
   const labelsForms = [
     {
+      label: "Evento",
+      value: dataUser?.product?.eventName || "Não informado",
+    },
+    {
       label: "Nome",
       value: dataUser?.name || "Não informado",
     },
@@ -34,23 +38,23 @@ export const ContainerUserData: React.FC<IContainerUserDataProps> = ({
     },
     {
       label: "Preço",
-      value: dataUser?.price || "Não informado",
+      value: dataUser?.product?.price || "Não informado",
     },
     {
       label: "Cidade",
-      value: dataUser?.city || "Não informado",
+      value: dataUser?.product?.address || "Não informado",
     },
     {
       label: "Data do evento",
-      value: dataUser?.date || "Não informado",
+      value: "09/12/2023",
     },
     {
       label: "Tipo do ingresso",
-      value: dataUser?.typeTicket || "Não informado",
+      value: dataUser?.product?.offerName || "Não informado",
     },
     {
       label: "Data da compra",
-      value: dataUser?.createdAt || "Não informado",
+      value: dataUser?.product?.createdAt || "Não informado",
     },
   ];
 

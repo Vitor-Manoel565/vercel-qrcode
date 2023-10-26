@@ -58,7 +58,14 @@ export default function Login() {
           onClick={async () => {
             try {
               setLoading(true);
-              await getAdminToken(userLogin.user, userLogin.password);
+              const userData = await getAdminToken(
+                userLogin.user,
+                userLogin.password
+              );
+              if (!userData) {
+                toast.error("Erro ao realizar login!");
+                return;
+              }
               toast.success("Login realizado com sucesso!");
             } catch (error) {
               toast.error("Erro ao realizar login!");
