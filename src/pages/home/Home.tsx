@@ -126,7 +126,7 @@ function Home() {
                             setUser(null);
                             setQrCodeResult(null);
                             window.location.reload();
-                          }, 2000);
+                          }, 1000);
                         } catch (err) {
                           toast.error("Erro ao confirmar entrada!");
                           return;

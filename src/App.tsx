@@ -5,7 +5,7 @@ import TestComponents from "./pages/testecomponents";
 import Login from "./pages/login";
 import { Container, LogoUVP } from "./theme/layout";
 import { COLORS } from "./theme/colors";
-import logo from "../src/assets/LogoAUVP.svg";
+import logo from "../src/assets/new-logo.png";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,17 +39,15 @@ const privateRouter = [
   {
     path: "/",
   },
-  {
-    path: "",
-  },
 ];
 
 function App() {
   useEffect(() => {
     const _token = localStorage.getItem("auvp@qrcodeapp");
     const _path = window.location.pathname;
+    const isMatch = privateRouter.find((route) => route.path === _path);
 
-    if (!_token && privateRouter.find((item) => item.path === _path)) {
+    if (!_token && isMatch) {
       router.navigate("/login");
     }
   }, []);
