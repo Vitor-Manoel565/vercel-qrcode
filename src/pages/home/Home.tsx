@@ -66,7 +66,20 @@ function Home() {
     fetchUser();
   }, [qrCodeResult]);
 
-  console.log(formsData);
+  const resetState = () => {
+    setUser(null);
+    setQrCodeResult(null);
+  };
+
+  const handleUserUpdate = async () => {
+    try {
+      await updateUser(id, true);
+      toast.success("Entrada confirmada com sucesso!");
+      resetState();
+    } catch (err) {
+      toast.error("Erro ao confirmar entrada!");
+    }
+  };
 
   return (
     <S.Container>
@@ -118,20 +131,7 @@ function Home() {
                     <Button
                       width="60%"
                       minWidth="40px"
-                      onClick={async () => {
-                        try {
-                          await updateUser(id, true);
-                          toast.success("Entrada confirmada com sucesso!");
-                          setTimeout(() => {
-                            setUser(null);
-                            setQrCodeResult(null);
-                            window.location.reload();
-                          }, 1000);
-                        } catch (err) {
-                          toast.error("Erro ao confirmar entrada!");
-                          return;
-                        }
-                      }}
+                      onClick={handleUserUpdate}
                       text="CONFIRMAR ENTADA"
                     />
                   )}
