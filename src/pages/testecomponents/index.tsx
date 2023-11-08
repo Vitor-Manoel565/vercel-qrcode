@@ -6,7 +6,6 @@ import { Container } from "../../theme/layout";
 function TestComponents() {
   const [userAccess, setUserAccess] = useState<string>("");
   const handleClick = () => {
-    console.log(userAccess);
     return;
   };
   return (

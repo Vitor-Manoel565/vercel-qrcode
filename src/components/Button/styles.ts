@@ -8,6 +8,8 @@ export const Button = styled.button<{
   backgroundColor?: string;
   border?: string;
   borderRadius?: string;
+  color?: string;
+  textSize?: string;
 }>`
   width: ${(props) => props.width || "100%"};
   min-width: ${(props) => props.minWidth || "320px"};
@@ -15,8 +17,8 @@ export const Button = styled.button<{
   border: ${(props) => props.border || "none"};
   border-radius: ${(props) => props.borderRadius || "6px"};
   background-color: ${(props) => props.backgroundColor || COLORS.primary};
-  color: ${COLORS.light};
-  font-size: ${FONTSIZE.sm};
+  color: ${(props) => props.color || COLORS.light};
+  font-size: ${(props) => props.textSize || FONTSIZE.sm};
   font-weight: 600;
   cursor: pointer;
 `;

@@ -10,10 +10,13 @@ interface IButtonProps {
   borderRadius?: string;
   border?: string;
   disabled?: boolean;
+  color?: string;
+  fontSize?: string;
 }
 
 export const Button: React.FC<IButtonProps> = ({
   text,
+  color,
   onClick,
   width,
   minWidth,
@@ -21,6 +24,7 @@ export const Button: React.FC<IButtonProps> = ({
   borderRadius,
   border,
   disabled,
+  fontSize,
 }) => {
   return (
     <S.Button
@@ -31,6 +35,8 @@ export const Button: React.FC<IButtonProps> = ({
       borderRadius={borderRadius}
       border={border}
       disabled={disabled}
+      color={color}
+      textSize={fontSize}
     >
       {text}
     </S.Button>

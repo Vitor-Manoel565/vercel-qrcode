@@ -58,11 +58,6 @@ export const ContainerUserData: React.FC<IContainerUserDataProps> = ({
     },
   ];
 
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 96 ~ ContainerUserData ~ labelsForms",
-    labelsForms
-  );
-
   return (
     <Container
       position="relative"

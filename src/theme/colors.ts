@@ -7,6 +7,7 @@ interface IColors<T> {
   gray: T;
   warning: T;
   grayDot: T;
+  grayDark: T;
 }
 
 export const COLORS: IColors<string> = {
@@ -18,8 +19,5 @@ export const COLORS: IColors<string> = {
   gray: "#F5F5F5",
   warning: "#FEC514",
   grayDot: "#B6B6B6",
+  grayDark: "#1f1f1f",
 };
-
-
-
-

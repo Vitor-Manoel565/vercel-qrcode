@@ -55,7 +55,6 @@ export const Container = styled.div<{
 export const LogoUVP = styled.img`
   width: 60px;
   height: 60px;
-  margin-bottom: 20px;
 `;
 
 export const Figcaption = styled.figcaption<{
@@ -84,4 +83,15 @@ export const IconFail = styled(IoIosCloseCircleOutline)`
   width: 40px;
   height: 40px;
   color: ${COLORS.alert};
+`;
+
+export const Navbar = styled.div`
+  width: 100vw;
+  height: 80px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 40px;
 `;

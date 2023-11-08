@@ -7,4 +7,20 @@ body{
   width: 100%;
   height: 100%;
   background-color: black;
+  /*style scroll bar*/
+  ::-webkit-scrollbar{
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track{
+    background: trans;
+  }
+  ::-webkit-scrollbar-thumb{
+    background: #DAA95A;
+    border-radius: 1rem;
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background: #555;
+  }
+
+
 }
